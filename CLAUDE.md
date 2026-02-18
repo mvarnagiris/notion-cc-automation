@@ -78,12 +78,10 @@ Agents read earlier sections and write to their own section. Never overwrite the
 
 ## Project → Repository Mapping
 
-Configured in `config.json` (see Configuration section). Each Notion `Project` value maps to a local repository path.
-
-| Notion Project | Repository | Notes |
+| Notion Project | Local path | Notes |
 |----------------|-----------|-------|
-| `Lumme` | `identifiers` | Monorepo — specify the module/subpath |
-| `Septynrankis` | `foodai` | Standalone repo |
+| `Lumme` | `~/projects/identifiers` | Monorepo. Primary work happens in `lumme/`. Shared code lives in `core/` — changes there may affect other apps. |
+| `Septynrankis` | `~/projects/foodai` | Standalone repo. |
 
 ## Agents
 
@@ -145,28 +143,15 @@ Reusable skills in `skills/` are available to all agents via Claude Code's skill
 
 ## Configuration
 
-### `config.json`
+### Notion
 
-```json
-{
-  "notion": {
-    "databaseId": "722af2f84576437c9a0bfcd9e64a40e6",
-    "collectionId": "280386f0-df1c-4775-aee7-bfe21724a99a"
-  },
-  "pollIntervalSeconds": 30,
-  "projects": {
-    "Lumme": {
-      "repo": "identifiers",
-      "path": "~/projects/identifiers",
-      "module": "lumme"
-    },
-    "Septynrankis": {
-      "repo": "foodai",
-      "path": "~/projects/foodai"
-    }
-  }
-}
-```
+- **Database URL:** `https://www.notion.so/722af2f84576437c9a0bfcd9e64a40e6`
+- **Collection ID:** `280386f0-df1c-4775-aee7-bfe21724a99a`
+
+### Poller
+
+- **Interval:** 120 seconds
+- **Alternative:** Notion webhooks can replace polling entirely — a webhook fires on every page update, eliminating the delay and unnecessary API calls. Worth switching to once the basic poller is working.
 
 ### Environment Variables
 
@@ -201,8 +186,7 @@ The agent file contains the full instructions. The page URL, project name, and r
 ## Repository Structure
 
 ```
-├── CLAUDE.md                    # This file
-├── config.json                  # Project and Notion config
+├── CLAUDE.md                    # This file — source of truth for all config and conventions
 ├── agents/
 │   ├── spec-agent.md            # Spec writing agent prompt
 │   ├── design-agent.md          # Design + screenshot agent prompt

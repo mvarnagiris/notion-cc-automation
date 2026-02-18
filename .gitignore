@@ -14,9 +14,6 @@ out/
 .env.*
 !.env.example
 
-# Config with real values (use config.example.json instead)
-config.json
-
 # Logs
 logs/
 *.log
