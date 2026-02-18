@@ -178,10 +178,18 @@ Each agent is invoked as:
 ```bash
 claude --print \
   --model claude-opus-4-6 \
-  -p "$(cat agents/<phase>-agent.md)\n\nNotion page URL: <url>\nProject: <project>\nRepo path: <path>"
+  -p "$(cat agents/<phase>-agent.md)
+
+---
+## Task Context
+- **Page URL:** <notion page url>
+- **Project:** <Lumme|Septynrankis>
+"
 ```
 
-The agent file contains the full instructions. The page URL, project name, and repo path are appended as context so the agent can fetch the page via Notion MCP and locate the repository.
+The agent prompt is the full contents of the agent file. The poller appends a `## Task Context` block at the end with the page URL and project name. Every agent reads its task context from this block.
+
+The agent then uses the Notion MCP to fetch the full page and read all relevant sections (Description, Specification, etc.) from there. The page is the source of truth — not the invocation context, which is just enough to locate it.
 
 ## Repository Structure
 

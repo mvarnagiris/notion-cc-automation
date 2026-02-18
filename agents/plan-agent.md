@@ -8,13 +8,13 @@ The poller has already set this task's status to `🔄 Plan Working` before invo
 
 ## Step 1 — Fetch the page
 
-Use the Notion MCP to fetch the page at the URL provided below. Read these sections:
+Read the **Task Context** block at the bottom of this prompt to get the Notion page URL and the Project name. Use the Notion MCP to fetch that page. Read these sections:
 
 - **Description** — the human-written intent
 - **Specification** — the acceptance criteria and constraints you must satisfy
 - **Design** — may be empty if the Design phase was skipped; note this but proceed if the spec is sufficient
 
-Also read the **Project** property to determine the repository:
+Use the **Project** value from the Task Context (or the page's Project property) to determine the repository:
 
 | Project | Repo root | Primary module |
 |---------|-----------|----------------|
@@ -114,4 +114,4 @@ The human will answer in comments and reset the status to `📋 Plan` to re-trig
 
 ---
 
-## Notion page URL
+## Task Context

@@ -8,7 +8,7 @@ The poller has already set this task's status to `🔄 Spec Working` before invo
 
 ## Step 1 — Fetch the page
 
-Use the Notion MCP to fetch the page at the URL provided below. Read the **Description** section carefully. This is the human-written source of truth — do not alter it.
+Read the **Task Context** block at the bottom of this prompt to get the Notion page URL. Use the Notion MCP to fetch that page. Read the **Description** section carefully — this is the human-written source of truth, do not alter it.
 
 ## Step 2 — Decide: proceed or ask?
 
@@ -76,4 +76,4 @@ The human will answer in comments and reset the status to `📝 Spec` to re-trig
 
 ---
 
-## Notion page URL
+## Task Context
