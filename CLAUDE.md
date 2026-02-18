@@ -23,7 +23,7 @@ Each task flows through phases. The human sets the initial phase status; CC tran
                                                         →  ❓ Plan Questions
 
 💻 Dev           →  [CC starts]  →  ⚙️ Dev Working     →  👀 Dev Review  (PR URL updated)
-                                                        →  (posts comment if blocked, stays in ⚙️ Dev Working)
+                                                        →  ❓ Dev Questions  (human answers in comments, then resets to 💻 Dev)
 
 ✅ Done / ❌ Cancelled  — terminal states, never trigger CC
 ```
@@ -127,7 +127,7 @@ Reads the full page (Description through Implementation Plan). In the mapped rep
 4. Creates a PR and updates `PR URL` on the Notion page
 5. Sets status to `👀 Dev Review`
 
-If blocked during implementation, posts a comment with the blocker and stays at `⚙️ Dev Working` until the human resolves it and re-triggers (or resets to `💻 Dev`).
+If blocked during implementation, posts a comment with the questions and sets status to `❓ Dev Questions`. Human answers in comments and resets to `💻 Dev` to retry.
 
 ## Skills
 
