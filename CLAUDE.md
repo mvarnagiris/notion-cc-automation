@@ -22,13 +22,13 @@ Each task flows through phases. The human sets the initial phase status; CC tran
 📋 Plan          →  [CC starts]  →  🔄 Plan Working    →  👀 Plan Review
                                                         →  ❓ Plan Questions
 
-💻 Dev           →  [CC starts]  →  ⚙️ Dev Working     →  👀 Dev Review  (PR URL updated)
+💻 Dev           →  [CC starts]  →  🔄 Dev Working     →  👀 Dev Review  (PR URL updated)
                                                         →  ❓ Dev Questions  (human answers in comments, then resets to 💻 Dev)
 
 ✅ Done / ❌ Cancelled  — terminal states, never trigger CC
 ```
 
-**Working statuses** (`🔄 Spec Working`, `🔄 Design Working`, `🔄 Plan Working`, `⚙️ Dev Working`) mean CC is actively running. The poller must never re-trigger tasks in these states.
+**Working statuses** (`🔄 Spec Working`, `🔄 Design Working`, `🔄 Plan Working`, `🔄 Dev Working`) mean CC is actively running. The poller must never re-trigger tasks in these states.
 
 **Review statuses** mean CC finished and a human needs to review. CC does not act on these.
 
