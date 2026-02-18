@@ -26,18 +26,20 @@ Use the **Project** value from the Task Context to locate the repository:
 | `Lumme` | `~/projects/identifiers` | `lumme/` — shared code lives in `core/`, changes there affect all apps in this monorepo |
 | `Septynrankis` | `~/projects/foodai` | repo root |
 
-Verify you are on the default branch and it is up to date:
+Make sure main is up to date, then create a feature branch and a **git worktree** for it. Using a worktree means this session has a fully isolated working directory — other CC sessions can run concurrently on different tasks without any conflict.
 
 ```bash
-git checkout main
-git pull
+# Update main without switching to it
+git -C <repo-root> fetch origin main
+git -C <repo-root> branch feature/<task-title-slug> origin/main
+
+# Create an isolated worktree for this branch
+git -C <repo-root> worktree add <repo-root>/.worktrees/feature-<task-title-slug> feature/<task-title-slug>
 ```
 
-Create a feature branch using the task title, lowercased and hyphenated:
+All subsequent work happens inside `<repo-root>/.worktrees/feature-<task-title-slug>`. Never touch the main checkout.
 
-```bash
-git checkout -b feature/<task-title-slug>
-```
+Branch name: task title lowercased, spaces replaced with hyphens, special characters removed. Example: "Dark mode support" → `feature/dark-mode-support`.
 
 ## Step 3 — Write an opening Development note
 
@@ -76,9 +78,9 @@ Follow each step in the **Implementation Plan** in order. For each step:
 
 When all steps are complete:
 
-1. Push the branch:
+1. Push the branch from the worktree:
    ```bash
-   git push -u origin feature/<task-title-slug>
+   git -C <repo-root>/.worktrees/feature-<task-title-slug> push -u origin feature/<task-title-slug>
    ```
 
 2. Create a PR using the GitHub CLI:
@@ -98,6 +100,11 @@ When all steps are complete:
 
 5. Update the page's **Status** property to `👀 Dev Review`.
 
+6. Clean up the worktree — the branch is safely pushed, the local checkout is no longer needed:
+   ```bash
+   git -C <repo-root> worktree remove .worktrees/feature-<task-title-slug>
+   ```
+
 ---
 
 ## Step 6 — Questions path
@@ -116,9 +123,9 @@ Stop and ask if:
 
 2. If you have already written some code, commit what compiles cleanly with a `wip:` prefix so it is not lost:
    ```bash
-   git add <files>
-   git commit -m "wip: <what is done so far>"
-   git push -u origin feature/<task-title-slug>
+   git -C <repo-root>/.worktrees/feature-<task-title-slug> add <files>
+   git -C <repo-root>/.worktrees/feature-<task-title-slug> commit -m "wip: <what is done so far>"
+   git -C <repo-root>/.worktrees/feature-<task-title-slug> push -u origin feature/<task-title-slug>
    ```
 
 3. Update the page's **Status** property to `❓ Dev Questions`.

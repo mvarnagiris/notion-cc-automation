@@ -211,6 +211,19 @@ The agent then uses the Notion MCP to fetch the full page and read all relevant 
 └── poller/                      # Polling service (to be implemented)
 ```
 
+## Git Worktrees
+
+The dev agent uses git worktrees so multiple tasks can run concurrently without interfering with each other. Each task gets its own isolated checkout at `<repo-root>/.worktrees/feature-<slug>/`.
+
+The `.worktrees/` directory must be gitignored in each project repo. If it is not already present, add it:
+
+```
+# .gitignore in identifiers and foodai repos
+.worktrees/
+```
+
+Worktrees are created at the start of a dev session and removed after the PR is pushed. The branch itself remains until the PR is merged.
+
 ## Key Invariants
 
 - **Never overwrite the Description section** — it is the human-written source of truth
